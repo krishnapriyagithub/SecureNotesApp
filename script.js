@@ -1,4 +1,6 @@
-import { auth, signUp, login } from "./firebase.js";
+import { login as firebaseLogin, signUp, logout } from "./firebase.js";
+
+
 
 let smail = document.getElementById("signup-email");
 let spass = document.getElementById("signup-password");
@@ -8,7 +10,8 @@ let lmail = document.getElementById("login-email");
 let lpass = document.getElementById("login-password");
 let lerror = document.getElementById("login-error");
 let signUpButton = document.getElementById("signUpButton");
-
+let loginButton=document.getElementById("loginButton");
+loginButton.addEventListener("click", validateAndLogin);
 
 
 // Function to handle Sign Up Validation
@@ -57,24 +60,32 @@ function ValidateAndRedirectSignup() {
 }
 
 // Function to handle Log In
-function ValidateAndLogin() {
-    lerror.innerText = ""; // Clear errors
-    if (!lmail.value || !lpass.value) {
-        lerror.innerText = "Email and Password cannot be empty.";
+function validateAndLogin() {
+    let errorMessage = "";
+
+    // 🚨 Validate Email
+    if (lmail.value.trim() === "") {
+        errorMessage += "Email cannot be empty.\n";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lmail.value)) {
+        errorMessage += "Enter a valid email address.\n";
+    }
+
+    // 🚨 Validate Password
+    if (lpass.value.trim() === "") {
+        errorMessage += "Password cannot be empty.\n";
+    }
+
+    // ❌ If any error exists, display it and return
+    if (errorMessage !== "") {
+        lerror.innerHTML = errorMessage.replace(/\n/g, "<br>"); // Show errors
         return;
     }
 
-    login(lmail.value, lpass.value)
-        .catch((error) => {
-            let message = error.message;
-            if (error.code === "auth/user-not-found") {
-                message = "User not found. Please sign up first.";
-            } else if (error.code === "auth/wrong-password") {
-                message = "Incorrect password.";
-            }
-            lerror.innerText = message;
-        });
+    // ✅ If no errors, call Firebase login function (renamed)
+    firebaseLogin(lmail.value, lpass.value);
 }
+
+
 
 // Event Listeners
 document.addEventListener("DOMContentLoaded", function () {

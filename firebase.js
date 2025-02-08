@@ -35,12 +35,13 @@ const login = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     console.log("User logged in:", userCredential.user);
-    localStorage.setItem("userID", userCredential.user.uid);
+
+    // Redirect to dashboard or homepage
     window.location.href = "dashboard.html";
-  } catch (error) {
+} catch (error) {
     console.error("Error logging in:", error.message);
-    throw error;
-  }
+    lerror.innerText = error.message; // Show Firebase error to user
+}
 };
 
 // 🔹 Function to Log Out a User
