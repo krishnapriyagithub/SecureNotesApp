@@ -1,7 +1,8 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyANqGfcWSR4PvHy1AuZQT6KputkFcr4Z4I",
   authDomain: "notes-app-6149d.firebaseapp.com",
@@ -21,8 +22,11 @@ const signUp = async (email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     console.log("User signed up:", userCredential.user);
+    localStorage.setItem("userID", userCredential.user.uid);
+    window.location.href = "dashboard.html";
   } catch (error) {
     console.error("Error signing up:", error.message);
+    throw error;  // Pass error to script.js
   }
 };
 
@@ -31,8 +35,11 @@ const login = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     console.log("User logged in:", userCredential.user);
+    localStorage.setItem("userID", userCredential.user.uid);
+    window.location.href = "dashboard.html";
   } catch (error) {
     console.error("Error logging in:", error.message);
+    throw error;
   }
 };
 
@@ -41,39 +48,10 @@ const logout = async () => {
   try {
     await signOut(auth);
     console.log("User logged out");
+    localStorage.removeItem("userID");
   } catch (error) {
     console.error("Error logging out:", error.message);
   }
 };
 
-// 🔹 Function to Add a New Note to Firestore
-const addNote = async (userId, noteText) => {
-  try {
-    const docRef = await addDoc(collection(db, "notes"), {
-      userId: userId,  // Associate note with the user
-      text: noteText,
-      timestamp: new Date()
-    });
-    console.log("Note added with ID:", docRef.id);
-  } catch (error) {
-    console.error("Error adding note:", error.message);
-  }
-};
-
-// 🔹 Function to Get All Notes of a User
-const getNotes = async (userId) => {
-  try {
-    const querySnapshot = await getDocs(collection(db, "notes"));
-    const notes = [];
-    querySnapshot.forEach((doc) => {
-      if (doc.data().userId === userId) {
-        notes.push({ id: doc.id, ...doc.data() });
-      }
-    });
-    return notes;
-  } catch (error) {
-    console.error("Error fetching notes:", error.message);
-  }
-};
-
-export { auth, db, signUp, login, logout, addNote, getNotes };
+export { auth, db, signUp, login, logout };
