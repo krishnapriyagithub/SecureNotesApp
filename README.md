@@ -7,7 +7,8 @@ Member 1: Krishna Priya Vinod - St. Teresa's College
 Member 2: Praveena Meenakshi PP - St. Teresa's College
 
 Hosted Project Link
-[mention your project hosted project link here]
+[https://drive.google.com/drive/folders/1xIWBJfWdsgMdm7dJm7Hzdh5CP72f92hQ?usp=sharing]
+was not able to deploy on vercel/render/netlify
 
 Project Description
 GhostPad is a simple, secure note-taking web application 
