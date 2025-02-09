@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostPad - Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>GhostPad</h1>
+        <h2 id="welcomeMessage">Welcome, User!</h2>
+        <button id="logoutButton">Log Out</button>
+    </header>
+
+    <section id="notesContainer">
+        <p id="noNotesMessage">No notes yet. Click the + button to add one.</p>
+    </section>
+    <button id="AddNote">+</button>
+    <div id="noteEditor" style="display: none;">
+        <input type="text" id="noteTitle" placeholder="Enter title">
+        <div contenteditable="true" id="noteDescription" placeholder="Enter note description"></div>
+        <textarea id="noteContent" placeholder="Write your note here..."></textarea><br>
+        <button id="saveNote">Save</button>
+        <button id="closeEditor">Cancel</button>
+    </div>
+
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
