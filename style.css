@@ -1,0 +1,85 @@
+body {
+    font-family: 'Patrick Hand', cursive;
+    background: linear-gradient(135deg, #FFD3A5, #FD6585);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* Centering Login & Signup Forms */
+.container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    background: #ff8c94;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff5e6c;
+}
+
+/* Dashboard Styling */
+.dashboard-container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+#notesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.note {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px;
+    width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#AddNote {
+    font-size: 24px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    background: #ff8c94;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#AddNote:hover {
+    background: #ff5e6c;
+}
